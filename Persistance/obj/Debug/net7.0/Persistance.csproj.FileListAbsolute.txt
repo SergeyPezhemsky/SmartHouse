@@ -1,0 +1,14 @@
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\bin\Debug\net7.0\Persistance.deps.json
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\bin\Debug\net7.0\Persistance.runtimeconfig.json
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\bin\Debug\net7.0\Persistance.dll
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\bin\Debug\net7.0\Persistance.pdb
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\Persistance.csproj.AssemblyReference.cache
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\Persistance.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\Persistance.AssemblyInfoInputs.cache
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\Persistance.AssemblyInfo.cs
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\Persistance.csproj.CoreCompileInputs.cache
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\Persistance.dll
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\refint\Persistance.dll
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\Persistance.pdb
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\Persistance.genruntimeconfig.cache
+C:\Users\serge\RiderProjects\SmartHouse\Persistance\obj\Debug\net7.0\ref\Persistance.dll
