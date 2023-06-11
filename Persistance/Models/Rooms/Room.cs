@@ -1,4 +1,6 @@
-﻿namespace Persistance.Models.Rooms;
+﻿using System;
+
+namespace Persistance.Models.Rooms;
 
 public class RoomDto
 {

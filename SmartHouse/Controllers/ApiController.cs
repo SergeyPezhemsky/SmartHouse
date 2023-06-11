@@ -1,5 +1,7 @@
-﻿using Domain.Rooms;
+﻿using System;
+using Domain.Rooms;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Persistance.Models.Write;
 
 namespace SmartHouse.Controllers;

@@ -1,4 +1,6 @@
-﻿namespace Domain.Rooms;
+﻿using System;
+
+namespace Domain.Rooms;
 
 public interface IRoom
 {

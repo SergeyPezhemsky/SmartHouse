@@ -1,4 +1,7 @@
-﻿namespace SmartHouse;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+namespace SmartHouse;
 
 public class Program
 {

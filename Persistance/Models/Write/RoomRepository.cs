@@ -1,5 +1,4 @@
 ﻿using Domain.Rooms;
-using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 using Persistance.Models.Rooms;
 
 namespace Persistance.Models.Write;
