@@ -26,6 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Domain.Devices\Domain.Devices.csproj" />
       <ProjectReference Include="..\Domain.Rooms\Domain.Rooms.csproj" />
       <ProjectReference Include="..\Queries\Queries.csproj" />
     </ItemGroup>

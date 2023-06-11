@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Persistance.Models.Devices;
 using Persistance.Models.Rooms;
 
 namespace Persistance;
@@ -12,4 +13,5 @@ public class SmartHouseContext : DbContext
     }
     
     public DbSet<RoomDto> RoomDto { get; set; }
+    public DbSet<DeviceDto> DeviceDto { get; set; }
 }
