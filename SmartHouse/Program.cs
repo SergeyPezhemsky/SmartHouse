@@ -1,6 +1,17 @@
-﻿var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+﻿namespace SmartHouse;
 
-app.MapGet("/", () => "Hello World!");
-
-app.Run();
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        CreateWebHostBuilder(args).Build().Run();
+    }
+    
+    static IHostBuilder CreateWebHostBuilder(string[] args)
+    {
+        return Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+                webBuilder.UseStartup<Startup>()
+            );
+    }
+}
