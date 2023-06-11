@@ -1,4 +1,5 @@
 ﻿using System;
+using Commands;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +31,7 @@ public class Startup
             .AddApiExplorer();
         services.AddSwaggerGen();
 
+        services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration,

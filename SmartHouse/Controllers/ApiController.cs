@@ -1,4 +1,6 @@
 ﻿using System;
+using Commands;
+using Commands.Rooms;
 using Domain.Rooms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,17 +11,17 @@ namespace SmartHouse.Controllers;
 [Route("[controller]/[action]")]
 public class ApiController : Controller
 {
-    public ApiController(ILogger<ApiController> logger)
+    private readonly ICommandDispatcher _commandDispatcher;
+    
+    public ApiController(ILogger<ApiController> logger, ICommandDispatcher commandDispatcher)
     {
+        _commandDispatcher = commandDispatcher;
     }
     
     [HttpPost]
     public void Add()
     {
-        var repository = new RoomRepository();
-        var room = new Room(Guid.NewGuid(), "Спальня");
-
-        repository.Add(room);
-        
+        var command = new AddRoomCommand("Спальня");
+        _commandDispatcher.Dispatch(command);
     }
 }
