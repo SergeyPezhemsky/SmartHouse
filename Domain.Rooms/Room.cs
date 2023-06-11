@@ -1,8 +1,6 @@
-﻿using System;
+﻿namespace Domain.Rooms;
 
-namespace Domain.Rooms;
-
-public class Room : IRoom
+class Room : IRoom
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

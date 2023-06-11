@@ -27,6 +27,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain.Rooms\Domain.Rooms.csproj" />
+      <ProjectReference Include="..\Queries\Queries.csproj" />
     </ItemGroup>
 
 </Project>

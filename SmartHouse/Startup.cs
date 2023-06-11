@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using Commands;
+using Domain.Rooms;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +34,9 @@ public class Startup
             .AddApiExplorer();
         services.AddSwaggerGen();
 
-        services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
+        services.AddScoped<ICommandDispatcher, CommandDispatcher>();
+
+        services.AddScoped<RoomFactory>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration,

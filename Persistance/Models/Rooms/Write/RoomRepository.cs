@@ -1,9 +1,8 @@
 ﻿using Domain.Rooms;
-using Persistance.Models.Rooms;
 
-namespace Persistance.Models.Write;
+namespace Persistance.Models.Rooms.Write;
 
-public class RoomRepository
+public class RoomRepository : IRoomRepository
 {
     public void Add(IRoom room)
     {
