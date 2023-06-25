@@ -1,15 +1,27 @@
 ﻿using Domain.Devices;
-using Persistance.Models.Devices.Write;
 
 namespace Commands.Devices;
 
 public class AddDeviceCommandHandler: ICommandHandler<AddDeviceCommand>
 {
+    private readonly IDeviceRepository _deviceRepository;
+    private readonly DeviceFactory _deviceFactory;
+
+    public AddDeviceCommandHandler(IDeviceRepository deviceRepository, DeviceFactory deviceFactory)
+    {
+        _deviceRepository = deviceRepository;
+        _deviceFactory = deviceFactory;
+    } 
+    
     public void Handle(AddDeviceCommand command)
     {
-        var repository = new DeviceRepository();
-        var device = new DeviceFactory().Create(command.Name, command.RoomId);
+        if (command.Name == null)
+        {
+            throw new ArgumentNullException("Name cannot be null");
+        }
+        
+        var device = _deviceFactory.Create(command.Name, command.RoomId);
 
-        repository.Add(device);
+        _deviceRepository.Add(device);
     }
 }

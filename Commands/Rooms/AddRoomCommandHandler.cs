@@ -1,5 +1,4 @@
 ﻿using Domain.Rooms;
-using Persistance.Models.Rooms.Write;
 
 namespace Commands.Rooms;
 
@@ -16,6 +15,11 @@ public class AddRoomCommandHandler : ICommandHandler<AddRoomCommand>
     
     public void Handle(AddRoomCommand command)
     {
+        if (command.Name == null)
+        {
+            throw new ArgumentNullException("Name cannot be null");
+        }
+        
         var room = _roomFactory.Create(command.Name);
         _roomRepository.Add(room);
     }

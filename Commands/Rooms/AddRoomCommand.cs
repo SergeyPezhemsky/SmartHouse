@@ -2,9 +2,9 @@
 
 public class AddRoomCommand
 {
-    public string Name { get; }
+    public string? Name { get; }
 
-    public AddRoomCommand(string name)
+    public AddRoomCommand(string? name)
     {
         Name = name;
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -14,12 +15,18 @@ public class PersistanceAutofacModule : Module
     {
         builder.RegisterType<SmartHouseContext>()
             .InstancePerLifetimeScope();
-            //.WithParameters(new NamedParameter("connectionString"))
+        //.WithParameters(new NamedParameter("connectionString"))
+
+        var assembly = Assembly.GetAssembly(typeof(SmartHouseContext));
+        if (assembly == null)
+        {
+            throw new ArgumentNullException("SmartHouseContext assembly is null");
+        }
         
-        builder.RegisterTypes(Assembly.GetAssembly(typeof(SmartHouseContext))
-                .GetTypes()
-                .Where(x => x.IsSubclassOf(typeof(Repository)))
-                .ToArray())
-            .AsImplementedInterfaces();
+        builder.RegisterTypes(assembly
+                    .GetTypes()
+                    .Where(x => x.IsSubclassOf(typeof(Repository)))
+                    .ToArray())
+                .AsImplementedInterfaces();
     }
 }
