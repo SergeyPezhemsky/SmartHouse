@@ -6,6 +6,11 @@ namespace Persistance;
 
 public class SmartHouseContext : DbContext
 {
+    public SmartHouseContext()
+    {
+        
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql(

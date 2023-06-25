@@ -2,8 +2,12 @@
 
 namespace Persistance.Models.Rooms.Write;
 
-public class RoomRepository : IRoomRepository
+public class RoomRepository : Repository, IRoomRepository
 {
+    public RoomRepository(SmartHouseContext smartHouseContext) : base(smartHouseContext)
+    {
+        
+    }
     public void Add(IRoom room)
     {
         var roomDto = new RoomDto
@@ -11,10 +15,8 @@ public class RoomRepository : IRoomRepository
             Id = room.Id,
             Name = room.Name
         };
-
-        var db = new SmartHouseContext();
-
-        db.RoomDto.Add(roomDto);
-        db.SaveChanges();
+        
+        _smartHouseContext.RoomDto.Add(roomDto);
+        _smartHouseContext.SaveChanges();
     }
 }

@@ -62,5 +62,6 @@ public class Startup
     public void ConfigureContainer(ContainerBuilder builder)
     {
         builder.RegisterModule(new CommandsAutofacModule());
+        builder.RegisterModule(new PersistanceAutofacModule());
     }
 }
