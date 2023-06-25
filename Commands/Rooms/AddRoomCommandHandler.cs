@@ -7,15 +7,15 @@ public class AddRoomCommandHandler : ICommandHandler<AddRoomCommand>
 {
     private readonly RoomFactory _roomFactory;
 
-    public AddRoomCommandHandler()
+    public AddRoomCommandHandler(RoomFactory roomFactory)
     {
-      //  _roomFactory = roomFactory;
+        _roomFactory = roomFactory;
     }
     
     public void Handle(AddRoomCommand command)
     {
         var repository = new RoomRepository();
-        var room = new RoomFactory().Create(command.Name);
+        var room = _roomFactory.Create(command.Name);
 
         repository.Add(room);
     }

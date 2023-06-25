@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
-using Commands;
-using Domain.Rooms;
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,10 +30,6 @@ public class Startup
         services.AddMvcCore()
             .AddApiExplorer();
         services.AddSwaggerGen();
-
-        services.AddScoped<ICommandDispatcher, CommandDispatcher>();
-
-        services.AddScoped<RoomFactory>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration,
@@ -64,5 +57,10 @@ public class Startup
         {
             e.MapControllers();
         });
+    }
+
+    public void ConfigureContainer(ContainerBuilder builder)
+    {
+        builder.RegisterModule(new CommandsAutofacModule());
     }
 }
