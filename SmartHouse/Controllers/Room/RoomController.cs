@@ -2,9 +2,10 @@
 using System.Linq;
 using Commands;
 using Commands.Rooms;
+using Domain.Rooms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Persistance.Models.Rooms.Read;
+using Queries.Room;
 using SmartHouse.Controllers.Room.Models;
 
 namespace SmartHouse.Controllers.Room;
@@ -13,10 +14,12 @@ namespace SmartHouse.Controllers.Room;
 public class RoomController : Controller
 {
     private readonly ICommandDispatcher _commandDispatcher;
+    private readonly IRoomQuery _roomQuery;
     
-    public RoomController(ILogger<ApiController> logger, ICommandDispatcher commandDispatcher)
+    public RoomController(ILogger<ApiController> logger, ICommandDispatcher commandDispatcher, IRoomQuery roomQuery)
     {
         _commandDispatcher = commandDispatcher;
+        _roomQuery = roomQuery;
     }
     
     [HttpPost]
@@ -29,8 +32,7 @@ public class RoomController : Controller
     [HttpGet]
     public IEnumerable<RoomDto> Rooms()
     {
-        var query = new RoomQuery();
-        return query.Execute().Select(x => new RoomDto
+        return _roomQuery.Execute().Select(x => new RoomDto
         {
             Name = x.Name
         });

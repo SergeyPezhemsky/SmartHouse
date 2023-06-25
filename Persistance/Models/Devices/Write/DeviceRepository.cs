@@ -2,8 +2,13 @@
 
 namespace Persistance.Models.Devices.Write;
 
-public class DeviceRepository : IDeviceRepository
+public class DeviceRepository : Repository, IDeviceRepository
 {
+    public DeviceRepository(SmartHouseContext smartHouseContext) : base(smartHouseContext)
+    {
+
+    }
+
     public void Add(IDevice device)
     {
         var deviceDto = new DeviceDto()
@@ -13,9 +18,7 @@ public class DeviceRepository : IDeviceRepository
             RoomId = device.RoomId
         };
 
-        var db = new SmartHouseContext();
-
-        db.DeviceDto.Add(deviceDto);
-        db.SaveChanges();
+        _smartHouseContext.DeviceDto.Add(deviceDto);
+        _smartHouseContext.SaveChanges();
     }
 }

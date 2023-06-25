@@ -2,27 +2,35 @@
 using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Persistance;
 
 namespace SmartHouse;
 
 public class Startup
 {
+    public IConfiguration Configuration { get; }
+    
     public Startup(IWebHostEnvironment env, IConfiguration configuration)
     {
         if (env is null)
             throw new ArgumentNullException("env is null");
 
-        if (configuration is null)
-            throw new ArgumentNullException("configuration is null");
+        Configuration = configuration ?? throw new ArgumentNullException("configuration is null");
     }
     
     public void ConfigureServices(IServiceCollection services)
     {
         if (services is null)
             throw new Exception("services is null");
+
+        services.AddDbContext<SmartHouseContext>(options =>
+        {
+            options.UseNpgsql(Configuration.GetConnectionString("SmartHouseContext"));
+        });
         
         services.AddMvc()
             .AddXmlSerializerFormatters();

@@ -2,9 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using Domain.Rooms;
 using Persistance;
-using Persistance.Models.Rooms.Write;
 using Module = Autofac.Module;
 
 namespace SmartHouse;
@@ -15,7 +13,6 @@ public class PersistanceAutofacModule : Module
     {
         builder.RegisterType<SmartHouseContext>()
             .InstancePerLifetimeScope();
-        //.WithParameters(new NamedParameter("connectionString"))
 
         var assembly = Assembly.GetAssembly(typeof(SmartHouseContext));
         if (assembly == null)
@@ -28,5 +25,11 @@ public class PersistanceAutofacModule : Module
                     .Where(x => x.IsSubclassOf(typeof(Repository)))
                     .ToArray())
                 .AsImplementedInterfaces();
+
+        builder.RegisterTypes(assembly
+                .GetTypes()
+                .Where(x => x.IsSubclassOf(typeof(Query)))
+                .ToArray())
+            .AsImplementedInterfaces();
     }
 }
