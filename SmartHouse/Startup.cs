@@ -7,6 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Persistance;
+using Persistance.Models.Devices.Write;
+using Persistance.Models.Rooms.Write;
+using SmartHouse.Controllers.Device.Models;
+using SmartHouse.Controllers.Room.Models;
 
 namespace SmartHouse;
 
@@ -38,6 +42,11 @@ public class Startup
         services.AddMvcCore()
             .AddApiExplorer();
         services.AddSwaggerGen();
+
+        services.AddAutoMapper(typeof(RoomMappingProfile));
+        services.AddAutoMapper(typeof(DeviceMappingProfile));
+        services.AddAutoMapper(typeof(RoomWriteMappingProfile));
+        services.AddAutoMapper(typeof(DeviceWriteMappingProfile));
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration,

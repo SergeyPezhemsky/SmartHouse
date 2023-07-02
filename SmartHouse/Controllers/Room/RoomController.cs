@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Commands;
 using Commands.Rooms;
-using Domain.Rooms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Queries.Room;
@@ -15,13 +15,18 @@ public class RoomController : Controller
 {
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IRoomQuery _roomQuery;
-    
-    public RoomController(ILogger<ApiController> logger, ICommandDispatcher commandDispatcher, IRoomQuery roomQuery)
+    private readonly IMapper _mapper;
+
+    public RoomController(ILogger<ApiController> logger,
+        ICommandDispatcher commandDispatcher,
+        IRoomQuery roomQuery,
+        IMapper mapper)
     {
         _commandDispatcher = commandDispatcher;
         _roomQuery = roomQuery;
+        _mapper = mapper;
     }
-    
+
     [HttpPost]
     public void Room([FromBody] RoomDto roomDto)
     {
@@ -32,9 +37,8 @@ public class RoomController : Controller
     [HttpGet]
     public IEnumerable<RoomDto> Rooms()
     {
-        return _roomQuery.Execute().Select(x => new RoomDto
-        {
-            Name = x.Name
-        });
+        var rooms = _roomQuery.Execute();
+
+        return _mapper.Map<IEnumerable<Queries.Room.Models.Room>, IEnumerable<RoomDto>>(rooms);
     }
 }

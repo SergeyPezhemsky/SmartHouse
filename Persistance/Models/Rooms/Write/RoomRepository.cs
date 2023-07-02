@@ -1,20 +1,20 @@
-﻿using Domain.Rooms;
+﻿using AutoMapper;
+using Domain.Rooms;
 
 namespace Persistance.Models.Rooms.Write;
 
 public class RoomRepository : Repository, IRoomRepository
 {
-    public RoomRepository(SmartHouseContext smartHouseContext) : base(smartHouseContext)
+    private readonly IMapper _mapper;
+
+    public RoomRepository(SmartHouseContext smartHouseContext, IMapper mapper) : base(smartHouseContext)
     {
-        
+        _mapper = mapper;
     }
+
     public void Add(IRoom room)
     {
-        var roomDto = new RoomDto
-        {
-            Id = room.Id,
-            Name = room.Name
-        };
+        var roomDto = _mapper.Map<IRoom, RoomDto>(room);
         
         _smartHouseContext.RoomDto.Add(roomDto);
         _smartHouseContext.SaveChanges();

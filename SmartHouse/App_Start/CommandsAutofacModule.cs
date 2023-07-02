@@ -4,6 +4,7 @@ using System.Reflection;
 using Autofac;
 using Commands;
 using Commands.Rooms;
+using Domain.Devices;
 using Domain.Rooms;
 using Module = Autofac.Module;
 
@@ -27,7 +28,19 @@ public class CommandsAutofacModule : Module
                 .ToArray())
             .AsSelf();
         
-        var commandHandlerAssembly = Assembly.GetAssembly(typeof(AddRoomCommandHandler));
+        var deviceFactoryAssembly = Assembly.GetAssembly(typeof(DeviceFactory));
+        if (deviceFactoryAssembly == null)
+        {
+            throw new ArgumentNullException("DeviceFactory assembly is null");
+        }
+        
+        builder.RegisterTypes(deviceFactoryAssembly
+                .GetTypes()
+                .Where(x => x.Name.EndsWith("Factory"))
+                .ToArray())
+            .AsSelf();
+        
+        var commandHandlerAssembly = Assembly.GetAssembly(typeof(CommandDispatcher));
         if (commandHandlerAssembly == null)
         {
             throw new ArgumentNullException("CommandHandler assembly is null");
