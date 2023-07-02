@@ -15,7 +15,8 @@ public class RoomQuery : Query, IRoomQuery
         return _smartHouseContext.RoomDto.AsNoTracking().ToList().Select(x => new Room
         {
             Name = x.Name,
-            Id = x.Id
+            Id = x.Id,
+            RoomKind = x.RoomKind
         });
     }
 }

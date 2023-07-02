@@ -30,7 +30,7 @@ public class RoomController : Controller
     [HttpPost]
     public void Room([FromBody] RoomDto roomDto)
     {
-        var command = new AddRoomCommand(roomDto.Name);
+        var command = new AddRoomCommand(roomDto.Name, roomDto.RoomKind);
         _commandDispatcher.Dispatch(command);
     }
 

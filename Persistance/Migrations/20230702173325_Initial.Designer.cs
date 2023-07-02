@@ -12,7 +12,7 @@ using Persistance;
 namespace Persistance.Migrations
 {
     [DbContext(typeof(SmartHouseContext))]
-    [Migration("20230610212131_Initial")]
+    [Migration("20230702173325_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -20,10 +20,30 @@ namespace Persistance.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0-preview.4.23259.3")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Persistance.Models.Devices.DeviceDto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("RoomId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("DeviceDto");
+                });
 
             modelBuilder.Entity("Persistance.Models.Rooms.RoomDto", b =>
                 {
@@ -35,9 +55,21 @@ namespace Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("RoomKind")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.ToTable("RoomDto");
+                });
+
+            modelBuilder.Entity("Persistance.Models.Devices.DeviceDto", b =>
+                {
+                    b.HasOne("Persistance.Models.Rooms.RoomDto", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId");
+
+                    b.Navigation("Room");
                 });
 #pragma warning restore 612, 618
         }

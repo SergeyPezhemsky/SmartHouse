@@ -20,7 +20,7 @@ public class AddRoomCommandHandler : ICommandHandler<AddRoomCommand>
             throw new ArgumentNullException("Name cannot be null");
         }
         
-        var room = _roomFactory.Create(command.Name);
+        var room = _roomFactory.Create(command.Name, command.RoomKind);
         _roomRepository.Add(room);
     }
 }

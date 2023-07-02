@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,6 +48,15 @@ public class Startup
         services.AddAutoMapper(typeof(DeviceMappingProfile));
         services.AddAutoMapper(typeof(RoomWriteMappingProfile));
         services.AddAutoMapper(typeof(DeviceWriteMappingProfile));
+        
+        services.AddControllers().AddJsonOptions(x =>
+        {
+            // serialize enums as strings in api responses (e.g. Role)
+            x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
+            // ignore omitted parameters on models to enable optional params (e.g. User update)
+            x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration,
